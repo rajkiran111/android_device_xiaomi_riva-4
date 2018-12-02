@@ -391,10 +391,6 @@ PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service.basic \
     android.hardware.usb.gadget@1.0-service-qti
 
-# Vndk-hack
-PRODUCT_COPY_FILES += \
-    prebuilts/vndk/v27/arm64/arch-arm64-armv8-a/shared/vndk-core/android.hardware.gnss@1.0.so:system/lib64/android.hardware.gnss@1.0-v27.so
-
 # Vibrator
 PRODUCT_PACKAGES += \
     android.hardware.vibrator@1.0-impl \

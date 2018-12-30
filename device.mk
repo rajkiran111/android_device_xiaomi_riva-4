@@ -157,6 +157,7 @@ include $(LOCAL_PATH)/rootdir/charger/charger.mk
 
 # Display
 PRODUCT_PACKAGES += \
+    copybit.msm8937 \
     gralloc.msm8937 \
     hwcomposer.msm8937 \
     memtrack.msm8937 \

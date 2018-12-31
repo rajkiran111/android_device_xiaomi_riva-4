@@ -18,7 +18,6 @@ $(call inherit-product, vendor/xiaomi/riva/riva-vendor.mk)
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
-DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay-lineage
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
@@ -147,10 +146,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.ir@1.0-impl \
     android.hardware.ir@1.0-service
-
-# Doze mode
-PRODUCT_PACKAGES += \
-    Doze
 
 # Charger
 include $(LOCAL_PATH)/rootdir/charger/charger.mk

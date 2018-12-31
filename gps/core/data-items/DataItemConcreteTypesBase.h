@@ -236,7 +236,8 @@ public:
     NetworkInfoDataItemBase(
     NetworkType initialType, int32_t type, string typeName, string subTypeName,
     bool available, bool connected, bool roaming ):
-            mAllTypes(typeToAllTypes(initialType)),
+            mAllTypes((initialType >= TYPE_UNKNOWN || initialType < TYPE_MOBILE) ?
+                      0 : (1<<initialType)),
             mType(type),
             mTypeName(typeName),
             mSubTypeName(subTypeName),
@@ -262,9 +263,7 @@ public:
     bool mRoaming;
 protected:
     DataItemId mId;
-    inline uint64_t typeToAllTypes(NetworkType type) {
-        return (type >= TYPE_UNKNOWN || type < TYPE_MOBILE) ?  0 : (1<<type);
-    }
+
 };
 
 class ServiceStatusDataItemBase : public IDataItemCore {
@@ -416,7 +415,7 @@ protected:
 class MccmncDataItemBase : public IDataItemCore {
 public:
     MccmncDataItemBase(const string & name) :
-        mValue(name),
+        mValue (name),
         mId(MCCMNC_DATA_ITEM_ID) {}
     virtual ~MccmncDataItemBase() {}
     inline virtual DataItemId getId() { return mId; }
@@ -430,7 +429,7 @@ protected:
 
 class SrnDeviceScanDetailsDataItemBase : public IDataItemCore {
 public:
-    SrnDeviceScanDetailsDataItemBase(DataItemId Id) :
+    SrnDeviceScanDetailsDataItemBase (DataItemId Id) :
         mValidSrnData(false),
         mApSrnRssi(-1),
         mApSrnTimestamp(0),
@@ -438,7 +437,7 @@ public:
         mReceiveTimestamp(0),
         mErrorCause(-1),
         mId(Id) {}
-    virtual ~SrnDeviceScanDetailsDataItemBase() {}
+    virtual ~SrnDeviceScanDetailsDataItemBase () {}
     inline virtual DataItemId getId() { return mId; }
     // Data members common to all SRN tech types
     /* Represents info on whether SRN data is valid (no error)*/
@@ -477,18 +476,6 @@ public:
     virtual ~BtLeDeviceScanDetailsDataItemBase() {}
     virtual void stringify(string& /*valueStr*/) {}
     virtual int32_t copy(IDataItemCore* /*src*/, bool* /*dataItemCopied = NULL*/) {return 1;}
-};
-
-class BatteryLevelDataItemBase : public IDataItemCore {
-public:
-    inline BatteryLevelDataItemBase(uint8_t batteryPct) :
-            mBatteryPct(batteryPct), mId(BATTERY_LEVEL_DATA_ITEM_ID) {}
-    inline ~BatteryLevelDataItemBase() {}
-    inline virtual DataItemId getId() { return mId; }
-// Data members
-    uint8_t mBatteryPct;
-protected:
-    DataItemId mId;
 };
 
 } // namespace loc_core

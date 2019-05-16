@@ -18,19 +18,22 @@ DEVICE_PATH := device/xiaomi/riva
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Inherit some common LineageOS stuff.
-$(call inherit-product, vendor/havoc/config/common.mk)
+# Inherit some common Superior stuff.
+$(call inherit-product, vendor/superior/config/common.mk)
 
 # Inherit from riva device
 $(call inherit-product, device/xiaomi/riva/device.mk)
+
+#Boot Animation res
+TARGET_BOOT_ANIMATION_RES := 1080
 
 PRODUCT_BRAND := Xiaomi
 PRODUCT_DEVICE := riva
 PRODUCT_MANUFACTURER := Xiaomi
 PRODUCT_MODEL := Redmi 5A
-PRODUCT_NAME := havoc_riva
+PRODUCT_NAME := superior_riva
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
